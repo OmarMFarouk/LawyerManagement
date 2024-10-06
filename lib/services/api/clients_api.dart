@@ -5,11 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:lawyermanagement/models/clients_model.dart';
 import 'package:lawyermanagement/services/api/endpoints.dart';
 
+import '../../modules/program_screens/layout.dart';
+
 class ClientsApi {
   Future fetchDropDownClients() async {
     try {
       var request = await http.post(Uri.parse(ApiEndPoints.showClientsDropDown),
-          body: {'vendor_id': '1'});
+          body: {'vendor_id': currentVendor.vendordetails!.vendorid});
       if (request.statusCode < 300) {
         var response = jsonDecode(request.body);
         return response;
@@ -21,8 +23,9 @@ class ClientsApi {
 
   Future fetchClients() async {
     try {
-      var request = await http
-          .post(Uri.parse(ApiEndPoints.showClients), body: {'vendor_id': '1'});
+      var request = await http.post(Uri.parse(ApiEndPoints.showClients), body: {
+        'vendor_id': currentVendor.vendordetails!.vendorid,
+      });
       if (request.statusCode < 300) {
         var response = jsonDecode(request.body);
         return response;

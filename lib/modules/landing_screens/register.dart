@@ -135,9 +135,9 @@ class RegisterScreen extends StatelessWidget {
                                         },
                                       ),
                                       const SizedBox(height: 20),
-                                      CountriesDropDown(
-                                          items: countryModel.countries!,
-                                          title: 'Select Your Country'),
+                                      const CountriesDropDown(
+                                        isAuth: true,
+                                      ),
                                       const SizedBox(height: 20),
                                       _buildTextField(
                                         controller: cubit.phoneCont,

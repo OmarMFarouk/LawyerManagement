@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lawyermanagement/blocs/case_bloc/case_cubit.dart';
 import 'package:lawyermanagement/models/clients_dropdown_model.dart';
 import 'package:lawyermanagement/services/api/clients_api.dart';
 import 'package:searchfield/searchfield.dart';
 
 class ClientSearchDropDown extends StatelessWidget {
-  const ClientSearchDropDown(
-      {super.key,
-      required this.value,
-      required this.onSelection,
-      required this.title});
-  final String title;
-  final String value;
-  final Function(SearchFieldListItem) onSelection;
+  const ClientSearchDropDown({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +25,13 @@ class ClientSearchDropDown extends StatelessWidget {
                       }
                       return null;
                     },
-                    onSuggestionTap: onSelection,
+                    onTap: () {},
+                    onSuggestionTap: (e) {
+                      BlocProvider.of<CaseCubit>(context).selectedClient =
+                          e.item;
+                    },
                     searchInputDecoration: SearchInputDecoration(
-                        hintText: title,
+                        hintText: 'Select a client...',
                         hintStyle: const TextStyle(color: Colors.black),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12))),

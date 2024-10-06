@@ -2,14 +2,12 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_cubit.dart';
+import 'package:lawyermanagement/blocs/case_bloc/case_cubit.dart';
 import 'package:lawyermanagement/models/countries_model.dart';
 
 class CountriesDropDown extends StatelessWidget {
-  const CountriesDropDown(
-      {super.key, required this.items, required this.title});
-  final String title;
-  final List<CountryModule?> items;
-
+  const CountriesDropDown({super.key, required this.isAuth});
+  final bool isAuth;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,15 +15,22 @@ class CountriesDropDown extends StatelessWidget {
       child: DropdownButtonFormField(
         onChanged: (value) {},
         validator: (value) {
-          if (BlocProvider.of<AuthCubit>(context).selectedCountry == null) {
+          if (isAuth &&
+              BlocProvider.of<AuthCubit>(context).selectedCountry == null) {
+            return '*Choose Country';
+          }
+          if (!isAuth &&
+              BlocProvider.of<CaseCubit>(context).selectedCountry == null) {
             return '*Choose Country';
           }
           return null;
         },
-        items: items.map((type) {
+        items: countryModel.countries!.map((type) {
           return DropdownMenuItem(
             onTap: () {
-              BlocProvider.of<AuthCubit>(context).selectedCountry = type;
+              isAuth
+                  ? BlocProvider.of<AuthCubit>(context).selectedCountry = type
+                  : BlocProvider.of<CaseCubit>(context).selectedCountry = type;
             },
             value: type!.code,
             child: Row(
@@ -43,10 +48,10 @@ class CountriesDropDown extends StatelessWidget {
         }).toList(),
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
-          labelText: title,
+          fillColor: Color(0xFFEBEBEB),
+          labelText: 'Country',
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
+            borderSide: BorderSide(),
             borderRadius: BorderRadius.circular(10),
           ),
         ),

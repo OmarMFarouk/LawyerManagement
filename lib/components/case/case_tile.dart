@@ -32,7 +32,8 @@ class CaseTile extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const Icon(Icons.description, color: Colors.indigo), // Icon for case subject
+                    const Icon(Icons.description,
+                        color: Colors.indigo), // Icon for case subject
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -51,7 +52,8 @@ class CaseTile extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const Icon(Icons.confirmation_number, color: Colors.green), // Icon for case number
+                    const Icon(Icons.confirmation_number,
+                        color: Colors.green), // Icon for case number
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -67,7 +69,8 @@ class CaseTile extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const Icon(Icons.person, color: Colors.orange), // Icon for client name
+                    const Icon(Icons.person,
+                        color: Colors.orange), // Icon for client name
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
@@ -83,7 +86,8 @@ class CaseTile extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    const Icon(Icons.category, color: Colors.blue), // Icon for case type
+                    const Icon(Icons.category,
+                        color: Colors.blue), // Icon for case type
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(

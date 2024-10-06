@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lawyermanagement/components/auth/register/countries_dropdown.dart';
+import 'package:lawyermanagement/models/countries_model.dart';
 
 import '../../blocs/case_bloc/case_cubit.dart';
 import '../general/my_field.dart';
@@ -50,11 +52,7 @@ class CaseFloatingButton extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 20),
-                                ClientSearchDropDown(
-                                    value: 'value',
-                                    onSelection: (p0) =>
-                                        cubit.clientId = p0.item.clientid,
-                                    title: 'Select a client..'),
+                                const ClientSearchDropDown(),
                                 const SizedBox(height: 16),
                                 MyField(
                                     label: 'Case Subject',
@@ -72,9 +70,9 @@ class CaseFloatingButton extends StatelessWidget {
                                     label: 'Archive Number',
                                     controller: cubit.archiveNumberCont),
                                 const SizedBox(height: 16),
-                                MyField(
-                                    label: 'Country',
-                                    controller: cubit.caseCountryCont),
+                                CountriesDropDown(
+                                  isAuth: false,
+                                ),
                                 const SizedBox(height: 16),
                                 MyField(
                                     label: 'Court Chamber',
@@ -99,7 +97,8 @@ class CaseFloatingButton extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         cubit.pickedFile == null
-                                            ? const Text('Choose File')
+                                            ? const Text(
+                                                'Choose File *Required')
                                             : Text(cubit.pickedFile!.name),
                                         const Icon(Icons.upload_file)
                                       ],
@@ -108,15 +107,15 @@ class CaseFloatingButton extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 16),
                                 MyField(
-                                    label: 'Notes',
-                                    controller: cubit.noteCont),
+                                    label: 'Notes', controller: cubit.noteCont),
                                 const SizedBox(height: 30),
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: ElevatedButton(
                                     onPressed: () {
                                       if (formKey.currentState!.validate() &&
-                                          cubit.clientId.isNotEmpty) {
+                                          cubit.selectedClient != null &&
+                                          cubit.pickedFile != null) {
                                         cubit.addCase();
                                         Navigator.pop(context);
                                       }

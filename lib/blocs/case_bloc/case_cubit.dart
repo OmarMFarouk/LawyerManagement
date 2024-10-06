@@ -5,6 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:lawyermanagement/models/cases_model.dart';
 import 'package:lawyermanagement/services/api/cases_api.dart';
 
+import '../../models/clients_dropdown_model.dart';
+import '../../models/countries_model.dart';
 import '../../modules/program_screens/layout.dart';
 import 'case_states.dart';
 
@@ -16,9 +18,9 @@ class CaseCubit extends Cubit<CaseStates> {
   TextEditingController caseNumberCont = TextEditingController();
   TextEditingController archiveNumberCont = TextEditingController();
   TextEditingController courtChamberCont = TextEditingController();
-  TextEditingController caseCountryCont = TextEditingController();
   TextEditingController noteCont = TextEditingController();
-  String clientId = '';
+  ClientDropDownItem? selectedClient;
+  CountryModule? selectedCountry;
   CasesModel? casesModel;
   List<Case> searchList = [];
   PlatformFile? pickedFile;
@@ -27,6 +29,7 @@ class CaseCubit extends Cubit<CaseStates> {
     try {
       await CasesApi().fetchCases().then((res) {
         casesModel = CasesModel.fromJson(res);
+
         emit(CaseInitial());
       });
     } catch (e) {
@@ -40,8 +43,8 @@ class CaseCubit extends Cubit<CaseStates> {
       Case newCase = Case(
         vendorId: currentVendor.vendordetails!.vendorid,
         caseArchiveNumber: archiveNumberCont.text.trim(),
-        caseClientId: clientId,
-        caseCountry: caseCountryCont.text.trim(),
+        caseClientId: selectedClient!.clientid,
+        caseCountry: selectedCountry!.name,
         caseNumber: caseNumberCont.text.trim(),
         caseCourtChamber: courtChamberCont.text.trim(),
         caseSubject: subjectCont.text.trim(),
@@ -145,13 +148,13 @@ class CaseCubit extends Cubit<CaseStates> {
   }
 
   clearControllers() {
-    caseCountryCont.clear();
     caseNumberCont.clear();
     subjectCont.clear();
     archiveNumberCont.clear();
     courtChamberCont.clear();
     typeCont.clear();
-    clientId = '';
+    selectedCountry = null;
+    selectedClient = null;
     pickedFile = null;
   }
 }

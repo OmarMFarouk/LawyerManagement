@@ -13,6 +13,7 @@ class CasesApi {
       var request = await http.post(Uri.parse(ApiEndPoints.showCases),
           body: {'vendor_id': currentVendor.vendordetails!.vendorid});
       if (request.statusCode < 300) {
+        print(request.body);
         var response = jsonDecode(request.body);
         return response;
       }
