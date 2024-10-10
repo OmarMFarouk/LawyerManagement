@@ -92,3 +92,5 @@ class AuthCubit extends Cubit<AuthStates> {
     phoneCont.clear();
   }
 }
+
+late VendorModel currentVendor;

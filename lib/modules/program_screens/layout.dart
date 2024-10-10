@@ -41,5 +41,3 @@ class LayoutProgramScreen extends StatelessWidget {
     );
   }
 }
-
-late VendorModel currentVendor;

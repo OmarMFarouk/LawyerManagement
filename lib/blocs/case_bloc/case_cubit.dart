@@ -8,6 +8,7 @@ import 'package:lawyermanagement/services/api/cases_api.dart';
 import '../../models/clients_dropdown_model.dart';
 import '../../models/countries_model.dart';
 import '../../modules/program_screens/layout.dart';
+import '../auth_bloc/auth_cubit.dart';
 import 'case_states.dart';
 
 class CaseCubit extends Cubit<CaseStates> {

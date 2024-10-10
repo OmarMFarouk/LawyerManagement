@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:lawyermanagement/models/clients_model.dart';
 import 'package:lawyermanagement/services/api/endpoints.dart';
 
+import '../../blocs/auth_bloc/auth_cubit.dart';
 import '../../modules/program_screens/layout.dart';
 
 class ClientsApi {

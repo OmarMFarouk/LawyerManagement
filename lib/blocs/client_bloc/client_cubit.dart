@@ -5,6 +5,7 @@ import 'package:lawyermanagement/models/clients_model.dart';
 import 'package:lawyermanagement/modules/program_screens/layout.dart';
 import 'package:lawyermanagement/services/api/Clients_api.dart';
 
+import '../auth_bloc/auth_cubit.dart';
 import 'client_states.dart';
 
 class ClientCubit extends Cubit<ClientStates> {

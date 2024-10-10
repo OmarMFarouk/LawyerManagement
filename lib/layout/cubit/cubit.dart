@@ -9,7 +9,10 @@ import 'package:lawyermanagement/modules/landing_screens/prices.dart';
 import 'package:lawyermanagement/modules/program_screens/case.dart';
 import 'package:lawyermanagement/modules/program_screens/clients.dart';
 import 'package:lawyermanagement/modules/program_screens/layout.dart';
+import 'package:lawyermanagement/modules/program_screens/login.dart';
 import 'package:lawyermanagement/modules/program_screens/settings.dart';
+
+import '../../blocs/auth_bloc/auth_cubit.dart';
 
 class WebCubit extends Cubit<WebStates> {
   WebCubit() : super(WebInitialStates());
@@ -19,10 +22,11 @@ class WebCubit extends Cubit<WebStates> {
 
   int currentIndex = 0;
 
-  final List<Widget> screens = [
+  final List<Widget> landingScreens = [
     const MenuScreen(),
     const PricesScreen(),
     const AboutUsScreen(),
+    LoginScreen()
   ];
 
   final List<BottomNavigationBarItem> bottomNavItems = [
@@ -38,10 +42,14 @@ class WebCubit extends Cubit<WebStates> {
       icon: Icon(Icons.info, color: Colors.teal[400]),
       label: 'About Us',
     ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.info, color: Colors.teal[400]),
+      label: 'Login',
+    ),
   ];
 
   void changeTab(int index) {
-    if (index < 0 || index >= screens.length) {
+    if (index < 0 || index >= landingScreens.length) {
       // Optionally handle invalid index
       return;
     }
@@ -56,7 +64,8 @@ class WebCubit extends Cubit<WebStates> {
   final List<Widget> screensProgram = [
     const CaseScreen(),
     const ClientsScreen(),
-    const SettingScreen()
+    const SettingScreen(),
+    LoginScreen()
   ];
 
   final List<AppBar> appBarItem = [
@@ -64,7 +73,7 @@ class WebCubit extends Cubit<WebStates> {
       title: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 100),
         child: Text(
-          currentVendor.vendordetails!.vendororganizationName!,
+          'Dashboard',
           style: const TextStyle(color: CupertinoColors.white),
         ),
       ),

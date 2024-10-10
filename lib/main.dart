@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_cubit.dart';
 import 'package:lawyermanagement/blocs/case_bloc/case_cubit.dart';
 import 'package:lawyermanagement/blocs/client_bloc/client_cubit.dart';
+import 'package:lawyermanagement/layout/layout.dart';
 import 'package:lawyermanagement/models/countries_model.dart';
 import 'package:lawyermanagement/modules/landing_screens/register.dart';
 import 'package:lawyermanagement/modules/program_screens/login.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         builder: EasyLoading.init(),
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        home: LayoutScreen(),
       ),
     );
   }

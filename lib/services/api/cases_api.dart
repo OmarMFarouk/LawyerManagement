@@ -7,6 +7,8 @@ import 'package:lawyermanagement/models/cases_model.dart';
 import 'package:lawyermanagement/modules/program_screens/layout.dart';
 import 'package:lawyermanagement/services/api/endpoints.dart';
 
+import '../../blocs/auth_bloc/auth_cubit.dart';
+
 class CasesApi {
   Future fetchCases() async {
     try {
