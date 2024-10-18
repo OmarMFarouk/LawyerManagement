@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lawyermanagement/layout/cubit/cubit.dart';
 import 'package:lawyermanagement/layout/cubit/states.dart';
+import 'package:url_launcher/link.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});
@@ -56,6 +57,7 @@ class LayoutScreen extends StatelessWidget {
                         if (isMobile)
                           InkWell(
                             onTap: () {
+                              WebCubit.get(context).index0();
                               print(size);
                             },
                             child: const Image(
@@ -85,42 +87,40 @@ class LayoutScreen extends StatelessWidget {
                                     color: Colors.grey[600],
                                   ),
                                   const SizedBox(width: 15),
-                                  IconButton(
-                                    icon: Icon(FontAwesomeIcons.facebookF,
-                                        color: Colors.blue[900]),
-                                    onPressed: () {},
+                                  Link(
+                                    uri: Uri.parse(
+                                        'https://www.facebook.com/profile.php?id=61566769034940'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) =>
+                                        IconButton(
+                                      icon: Icon(FontAwesomeIcons.facebookF,
+                                          color: Colors.blue[900]),
+                                      onPressed: followLink,
+                                    ),
                                   ),
                                   const SizedBox(width: 10),
-                                  IconButton(
-                                    icon: const Icon(FontAwesomeIcons.twitter,
-                                        color: Colors.blueAccent),
-                                    onPressed: () {
-                                      // Implement your Twitter link
-                                    },
+                                  Link(
+                                    uri: Uri.parse('https://wa.me/31648317668'),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) =>
+                                        IconButton(
+                                      icon: Icon(FontAwesomeIcons.whatsapp,
+                                          color: Colors.green[700]),
+                                      onPressed: followLink,
+                                    ),
                                   ),
                                   const SizedBox(width: 10),
-                                  IconButton(
-                                    icon: Icon(FontAwesomeIcons.linkedinIn,
-                                        color: Colors.blue[900]),
-                                    onPressed: () {
-                                      // Implement your LinkedIn link
-                                    },
-                                  ),
-                                  const SizedBox(width: 10),
-                                  IconButton(
-                                    icon: Icon(FontAwesomeIcons.whatsapp,
-                                        color: Colors.green[700]),
-                                    onPressed: () {
-                                      // Implement your WhatsApp link
-                                    },
-                                  ),
-                                  const SizedBox(width: 10),
-                                  IconButton(
-                                    icon: const Icon(FontAwesomeIcons.phone,
-                                        color: Colors.indigo),
-                                    onPressed: () {
-                                      // Implement your phone call action
-                                    },
+                                  Link(
+                                    uri: Uri.parse(
+                                        'https://www.instagram.com/visaino.law/profilecard/?igsh=MXMyd2RyemFmbDR1aQ=='),
+                                    target: LinkTarget.blank,
+                                    builder: (context, followLink) =>
+                                        IconButton(
+                                      icon: const Icon(
+                                          FontAwesomeIcons.instagram,
+                                          color: Colors.red),
+                                      onPressed: followLink,
+                                    ),
                                   ),
                                 ],
                               )

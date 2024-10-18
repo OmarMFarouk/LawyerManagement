@@ -25,6 +25,10 @@ class WebCubit extends Cubit<WebStates> {
     const AboutUsScreen(),
     LoginScreen()
   ];
+  void index0() {
+    currentIndex = 0;
+    emit(WebBarProgramStates());
+  }
 
   final List<BottomNavigationBarItem> bottomNavItems = [
     BottomNavigationBarItem(

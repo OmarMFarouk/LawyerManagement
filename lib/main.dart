@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:lawyermanagement/blocs/case_bloc/case_cubit.dart';
 import 'package:lawyermanagement/blocs/client_bloc/client_cubit.dart';
-import 'package:lawyermanagement/modules/landing_screens/layout.dart';
 import 'blocs/auth_bloc/auth_cubit.dart';
+import 'layout/cubit/layout.dart';
 import 'models/countries_model.dart';
 import 'shared/bloc.dart';
 

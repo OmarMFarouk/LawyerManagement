@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Add this package to use FontAwesome icons
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/link.dart'; // Add this package to use FontAwesome icons
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -244,8 +245,8 @@ class AboutUsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              isMobile?
-              Container(
+              isMobile
+                  ? Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Colors.blueGrey[800]!, Colors.blueGrey[600]!],
@@ -256,7 +257,51 @@ class AboutUsScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    // Navigation Buttons
+                    // Company Information
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'ISTEDAFIH',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'KVK-number: 95019774',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          'Wijnkorenstraat 3 - 4706 PM',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          'Roosendaal - Netherlands',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          '+31 64 83 17 668',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    // Navigation Links
                     Column(
                       children: [
                         Row(
@@ -292,20 +337,18 @@ class AboutUsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10),
                         const Text(
-                          '© 2003-2024 Visaino.All rights reserved.',
+                          '© 2003-2024 Visaino. All rights reserved.',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15
+                            color: Colors.white,
+                            fontSize: 15,
                           ),
-                        )
+                        ),
                       ],
                     ),
                     const Spacer(),
-                    // Contact and Social Media
+                    // Contact and Social Media Icons
                     Row(
                       children: [
                         const Text(
@@ -323,44 +366,56 @@ class AboutUsScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                         const SizedBox(width: 15),
-                        InkWell(
-                          onTap: () {},
-                          hoverColor: Colors.grey[700],
-                          borderRadius: BorderRadius.circular(25),
-                          child: const CircleAvatar(
-                            backgroundColor: Colors.black,
-                            child: FaIcon(
-                              FontAwesomeIcons.twitter,
-                              color: Colors.blue,
-                              size: 24,
+                        Link(
+                          uri: Uri.parse('https://wa.me/31648317668'),
+                          target: LinkTarget.blank,
+                          builder: (context, openLink) => InkWell(
+                            onTap: openLink,
+                            child: const CircleAvatar(
+                              backgroundColor: Colors.black,
+                              child: FaIcon(
+                                FontAwesomeIcons.whatsapp,
+                                color: Colors.green,
+                                size: 24,
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {},
-                          hoverColor: Colors.grey[700],
-                          borderRadius: BorderRadius.circular(25),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.black,
-                            child: FaIcon(
-                              FontAwesomeIcons.facebook,
-                              color: Colors.blue[800],
-                              size: 24,
+                        Link(
+                          uri: Uri.parse(
+                              'https://www.instagram.com/visaino.law/profilecard/?igsh=MXMyd2RyemFmbDR1aQ=='),
+                          target: LinkTarget.blank,
+                          builder: (context, openLink) => InkWell(
+                            onTap: openLink,
+                            hoverColor: Colors.grey[700],
+                            borderRadius: BorderRadius.circular(25),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              child: FaIcon(
+                                FontAwesomeIcons.instagram,
+                                color: Colors.red[800],
+                                size: 24,
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {},
-                          hoverColor: Colors.grey[700],
-                          borderRadius: BorderRadius.circular(25),
-                          child: const CircleAvatar(
-                            backgroundColor: Colors.black,
-                            child: FaIcon(
-                              FontAwesomeIcons.instagram,
-                              color: Colors.red,
-                              size: 24,
+                        Link(
+                          uri: Uri.parse(
+                              'https://www.facebook.com/profile.php?id=61566769034940'),
+                          target: LinkTarget.blank,
+                          builder: (context, openLink) => InkWell(
+                            onTap: openLink,
+                            hoverColor: Colors.grey[700],
+                            borderRadius: BorderRadius.circular(25),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              child: FaIcon(
+                                FontAwesomeIcons.facebook,
+                                color: Colors.indigo[900],
+                                size: 24,
+                              ),
                             ),
                           ),
                         ),
@@ -368,8 +423,8 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ) :
-              Container(
+              )
+                  : Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Colors.blueGrey[800]!, Colors.blueGrey[600]!],
@@ -379,8 +434,53 @@ class AboutUsScreen extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.all(20),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Navigation Buttons
+                    // Company Information
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'ISTEDAFIH',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'KVK-number: 95019774',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          'Wijnkorenstraat 3 - 4706 PM',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          'Roosendaal - Netherlands',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          '+31 64 83 17 668',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    // Navigation Links and Contact Section
                     Column(
                       children: [
                         Row(
@@ -416,76 +516,86 @@ class AboutUsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10),
                         const Text(
-                          '© 2003-2024 Visaino.All rights reserved.',
+                          '© 2003-2024 Visaino. All rights reserved.',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 20,),
-                    Row(
-                      children: [
-                        const Text(
-                          'Contact Us',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
                             color: Colors.white,
+                            fontSize: 15,
                           ),
                         ),
-                        const SizedBox(width: 15),
-                        Container(
-                          width: 2,
-                          height: 24,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(width: 15),
-                        InkWell(
-                          onTap: () {},
-                          hoverColor: Colors.grey[700],
-                          borderRadius: BorderRadius.circular(25),
-                          child: const CircleAvatar(
-                            backgroundColor: Colors.black,
-                            child: FaIcon(
-                              FontAwesomeIcons.twitter,
-                              color: Colors.blue,
-                              size: 24,
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            const Text(
+                              'Contact Us',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {},
-                          hoverColor: Colors.grey[700],
-                          borderRadius: BorderRadius.circular(25),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.black,
-                            child: FaIcon(
-                              FontAwesomeIcons.facebook,
-                              color: Colors.blue[800],
-                              size: 24,
+                            const SizedBox(width: 15),
+                            Container(
+                              width: 2,
+                              height: 24,
+                              color: Colors.white,
                             ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {},
-                          hoverColor: Colors.grey[700],
-                          borderRadius: BorderRadius.circular(25),
-                          child: const CircleAvatar(
-                            backgroundColor: Colors.black,
-                            child: FaIcon(
-                              FontAwesomeIcons.instagram,
-                              color: Colors.red,
-                              size: 24,
+                            const SizedBox(width: 15),
+                            Link(
+                              uri: Uri.parse('https://wa.me/31648317668'),
+                              target: LinkTarget.blank,
+                              builder: (context, openLink) => InkWell(
+                                onTap: openLink,
+                                child: const CircleAvatar(
+                                  backgroundColor: Colors.black,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.whatsapp,
+                                    color: Colors.green,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            const SizedBox(width: 10),
+                            Link(
+                              uri: Uri.parse(
+                                  'https://www.instagram.com/visaino.law/profilecard/?igsh=MXMyd2RyemFmbDR1aQ=='),
+                              target: LinkTarget.blank,
+                              builder: (context, openLink) => InkWell(
+                                onTap: openLink,
+                                hoverColor: Colors.grey[700],
+                                borderRadius: BorderRadius.circular(25),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.black,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.instagram,
+                                    color: Colors.red[800],
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Link(
+                              uri: Uri.parse(
+                                  'https://www.facebook.com/profile.php?id=61566769034940'),
+                              target: LinkTarget.blank,
+                              builder: (context, openLink) => InkWell(
+                                onTap: openLink,
+                                hoverColor: Colors.grey[700],
+                                borderRadius: BorderRadius.circular(25),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.black,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.facebook,
+                                    color: Colors.indigo[900],
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

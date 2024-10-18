@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_cubit.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_states.dart';
+import 'package:lawyermanagement/modules/landing_screens/register.dart';
 import 'package:lawyermanagement/modules/program_screens/layout.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -136,6 +137,22 @@ class LoginScreen extends StatelessWidget {
                                           cubit.loginClient();
                                         }
                                       }),
+                                  const SizedBox(height: 30),
+                                  Row(
+                                    children: [
+                                      const Text("Don't have an account?"),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RegisterScreen()),
+                                            );
+                                          },
+                                          child: Text('Register'))
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
@@ -224,10 +241,7 @@ class LoginScreen extends StatelessWidget {
               ),
               const Text(
                 '© 2003-2024 Visaino.All rights reserved.',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 15),
               )
             ],
           ),
@@ -236,7 +250,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               IconButton(
                 icon:
-                const FaIcon(FontAwesomeIcons.twitter, color: Colors.white),
+                    const FaIcon(FontAwesomeIcons.twitter, color: Colors.white),
                 onPressed: () {},
               ),
               const SizedBox(width: 10),
