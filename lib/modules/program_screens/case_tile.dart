@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lawyermanagement/modules/program_screens/case_details.dart';
+import '../../blocs/case_bloc/case_cubit.dart';
 import '../../models/cases_model.dart';
 
 class CaseTile extends StatelessWidget {
@@ -31,7 +33,7 @@ class CaseTile extends StatelessWidget {
             builder: (context, constraints) {
               // Use a threshold to determine when to switch layout
               bool isNarrow = constraints.maxWidth < 600;
-              return isNarrow ? _buildColumnLayout() : _buildRowLayout();
+              return isNarrow ? _buildColumnLayout(context) : _buildRowLayout();
             },
           ),
         ),
@@ -39,15 +41,18 @@ class CaseTile extends StatelessWidget {
     );
   }
 
-  Column _buildColumnLayout() {
+  Column _buildColumnLayout(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildCaseInfoRow(Icons.description, Colors.indigo, caseDetails.caseSubject!),
+        _buildCaseInfoRow(
+            Icons.description, Colors.indigo, caseDetails.caseSubject!),
         const SizedBox(height: 10),
-        _buildCaseInfoRow(Icons.confirmation_number, Colors.green, caseDetails.caseNumber!),
+        _buildCaseInfoRow(
+            Icons.confirmation_number, Colors.green, caseDetails.caseNumber!),
         const SizedBox(height: 10),
-        _buildCaseInfoRow(Icons.person, Colors.orange, caseDetails.caseClientName!),
+        _buildCaseInfoRow(
+            Icons.person, Colors.orange, caseDetails.caseClientName!),
         const SizedBox(height: 10),
         _buildCaseInfoRow(Icons.category, Colors.blue, caseDetails.caseType!),
         const SizedBox(height: 10),
@@ -55,6 +60,8 @@ class CaseTile extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: TextButton.icon(
             onPressed: () {
+              BlocProvider.of<CaseCubit>(context)
+                  .deleteCase(caseId: caseDetails.caseId);
             },
             label: const Text('Delete'),
             icon: const Icon(
@@ -71,10 +78,18 @@ class CaseTile extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: _buildCaseInfoRow(Icons.description, Colors.indigo, caseDetails.caseSubject!)),
-        Expanded(child: _buildCaseInfoRow(Icons.confirmation_number, Colors.green, caseDetails.caseNumber!)),
-        Expanded(child: _buildCaseInfoRow(Icons.person, Colors.orange, caseDetails.caseClientName!)),
-        Expanded(child: _buildCaseInfoRow(Icons.category, Colors.blue, caseDetails.caseType!)),
+        Expanded(
+            child: _buildCaseInfoRow(
+                Icons.description, Colors.indigo, caseDetails.caseSubject!)),
+        Expanded(
+            child: _buildCaseInfoRow(Icons.confirmation_number, Colors.green,
+                caseDetails.caseNumber!)),
+        Expanded(
+            child: _buildCaseInfoRow(
+                Icons.person, Colors.orange, caseDetails.caseClientName!)),
+        Expanded(
+            child: _buildCaseInfoRow(
+                Icons.category, Colors.blue, caseDetails.caseType!)),
         TextButton.icon(
           onPressed: () {
             // Implement delete functionality here

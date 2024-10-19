@@ -135,6 +135,21 @@ class CaseCubit extends Cubit<CaseStates> {
     }
   }
 
+  deleteCase({required caseId}) async {
+    emit(CaseLoading());
+    EasyLoading.show(status: 'Deleting...', dismissOnTap: false);
+    await CasesApi().deleteCase(caseId: caseId).then((res) {
+      if (res['success'] == true) {
+        emit(CaseAdded());
+        clearControllers();
+        fetchCases();
+      } else {
+        emit(CaseFailure('Check Internet'));
+      }
+      EasyLoading.dismiss();
+    });
+  }
+
   clearControllers() {
     selectedCountry = null;
     caseNumberCont.clear();

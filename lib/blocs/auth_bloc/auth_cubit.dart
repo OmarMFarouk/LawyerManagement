@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -22,7 +24,7 @@ class AuthCubit extends Cubit<AuthStates> {
   String? paymentIntentSecret;
   Bundle? selectedBundle;
   CountryModule? selectedCountry;
-
+  String? otpCode;
   registerClient() async {
     emit(AuthInitial());
     EasyLoading.show(status: 'Waiting...', dismissOnTap: false);
@@ -52,10 +54,12 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   loginClient() async {
+    otpCode = generateRandomString(6);
     emit(AuthInitial());
     EasyLoading.show(status: 'Waiting...', dismissOnTap: false);
     await AuthApi()
         .login(
+      otpCode: otpCode,
       email: emailCont.text.trim(),
       password: passwordCont.text.trim(),
     )
@@ -75,6 +79,20 @@ class AuthCubit extends Cubit<AuthStates> {
         emit(AuthFailure(res['message'], res['error_code']));
       }
     });
+  }
+
+  checkOTP(otp) async {
+    print(otp);
+    print(otpCode);
+    if (otpCode == otp) {
+      emit(AuthSuccess('Logged in'));
+
+      otpCode = null;
+      EasyLoading.dismiss();
+    } else {
+      EasyLoading.dismiss();
+      emit(AuthFailure('Wrong Otp', 4));
+    }
   }
 
   updateUserInfo() async {
@@ -122,3 +140,13 @@ class AuthCubit extends Cubit<AuthStates> {
 }
 
 late VendorModel? currentVendor;
+String generateRandomString(int length) {
+  const charSet = '0123456789';
+  final random = Random();
+  return String.fromCharCodes(
+    Iterable.generate(
+      length,
+      (_) => charSet.codeUnits[random.nextInt(charSet.length)],
+    ),
+  );
+}

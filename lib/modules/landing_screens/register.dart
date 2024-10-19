@@ -19,6 +19,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width > 859;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -57,6 +58,7 @@ class RegisterScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            isMobile?
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 80, vertical: 40),
@@ -209,6 +211,197 @@ class RegisterScreen extends StatelessWidget {
                                                 .checkAuth(
                                                     email:
                                                         cubit.emailCont.text);
+                                            if (emailExist) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                      'Email Already Exists'),
+                                                ),
+                                              );
+                                            } else {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    PaymentDialog(),
+                                              );
+                                            }
+                                          }
+                                        },
+                                      ),
+                                      const SizedBox(height: 30),
+                                      Row(
+                                        children: [
+                                          const Text('Already have account?  '),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          LoginScreen()),
+                                                );
+                                              },
+                                              child: Text('Login'))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ) : Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 20),
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.9),
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    const BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 10,
+                                      offset: Offset(0, 5),
+                                    ),
+                                  ],
+                                ),
+                                child: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    children: [
+                                      // Organization Name
+                                      _buildTextField(
+                                        controller: cubit.orgCont,
+                                        icon: Icons.business,
+                                        label: 'Organization Name',
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.trim().isEmpty) {
+                                            return 'Please enter organization name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _buildTextField(
+                                        controller: cubit.firstNameCont,
+                                        icon: Icons.person,
+                                        label: 'First Name',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter your first name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _buildTextField(
+                                        controller: cubit.lastNameCont,
+                                        icon: Icons.person_outline,
+                                        label: 'Last Name',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter your last name';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _buildTextField(
+                                        controller: cubit.emailCont,
+                                        icon: Icons.email,
+                                        label: 'Email',
+                                        keyboardType:
+                                        TextInputType.emailAddress,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter your email';
+                                          } else if (!value.contains('@') ||
+                                              !value.contains('.') ||
+                                              value.endsWith('.') ||
+                                              value.contains('.@') ||
+                                              value.contains('@.') ||
+                                              value.endsWith('@')) {
+                                            return 'Invalid email';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 20),
+                                      CountriesDropDown(
+                                        title: 'Select Country',
+                                        isDashboard: false,
+                                        items: countryModel.countries!,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _buildTextField(
+                                        controller: cubit.phoneCont,
+                                        icon: Icons.phone,
+                                        label: 'Phone',
+                                        keyboardType: TextInputType.phone,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter your phone number';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _buildTextField(
+                                        controller: cubit.passwordCont,
+                                        icon: Icons.lock,
+                                        label: 'Password',
+                                        obscureText: true,
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.length < 6) {
+                                            return 'Password must be at least 6 characters';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _buildTextField(
+                                        controller: cubit.confirmPasswordCont,
+                                        icon: Icons.lock_outline,
+                                        label: 'Confirm Password',
+                                        obscureText: true,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please confirm your password';
+                                          } else if (value !=
+                                              cubit.passwordCont.text) {
+                                            return 'Passwords mismatch';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      const SizedBox(height: 30),
+                                      ElevatedButton.icon(
+                                        style: ElevatedButton.styleFrom(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          backgroundColor: Colors.indigo[700],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(12),
+                                          ),
+                                        ),
+                                        icon: const Icon(Icons.check_circle,
+                                            color: Colors.white),
+                                        label: const Text('Register',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white)),
+                                        onPressed: () async {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            bool emailExist = await AuthApi()
+                                                .checkAuth(
+                                                email:
+                                                cubit.emailCont.text);
                                             if (emailExist) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(

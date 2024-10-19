@@ -97,6 +97,9 @@ class SettingScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     TextButton(
                       onPressed: () => Restart.restartApp(),
                       style: const ButtonStyle(

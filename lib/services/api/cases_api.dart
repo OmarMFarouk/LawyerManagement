@@ -66,6 +66,21 @@ class CasesApi {
     }
   }
 
+  Future deleteCase({required caseId}) async {
+    try {
+      var request = await http.post(Uri.parse(ApiEndPoints.deleteCase), body: {
+        'vendor_id': currentVendor!.vendordetails!.vendorid,
+        'case_id': caseId
+      });
+      if (request.statusCode < 300) {
+        var response = jsonDecode(request.body);
+        return response;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   Future addCaseFile(
       {required caseId,
       required caseClientId,

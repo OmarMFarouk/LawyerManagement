@@ -60,11 +60,13 @@ class AuthApi {
   Future login({
     required password,
     required email,
+    required otpCode,
   }) async {
     try {
       var request = await http.post(Uri.parse(ApiEndPoints.login), body: {
         'api_key': ApiEndPoints.apiKey,
         'password': password,
+        'otp_code': otpCode,
         'email': email,
       });
       if (request.statusCode < 300) {
