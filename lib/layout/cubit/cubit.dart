@@ -70,6 +70,7 @@ class WebCubit extends Cubit<WebStates> {
 
   final List<AppBar> appBarItem = [
     AppBar(
+      automaticallyImplyLeading: false,
       title: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 100),
         child: Text(

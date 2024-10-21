@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -32,14 +33,22 @@ class _OTPScreenState extends State<OTPScreen> {
   }
 
   void _startTimer() {
-    setState(() {
-      _isTimerActive = true;
-    });
-    Future.delayed(Duration(seconds: _timerDuration), () {
+    if (_isTimerActive == false) {
       setState(() {
-        _isTimerActive = false;
+        _isTimerActive = true;
       });
-    });
+      Timer.periodic(Duration(seconds: 1), (s) {
+        setState(() {
+          _timerDuration -= 1;
+        });
+      });
+      Future.delayed(Duration(seconds: 30), () {
+        setState(() {
+          _isTimerActive = false;
+          _timerDuration = 30;
+        });
+      });
+    }
   }
 
   @override

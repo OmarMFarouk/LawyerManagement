@@ -72,7 +72,7 @@ class AuthCubit extends Cubit<AuthStates> {
         currentVendor = VendorModel.fromJson(res);
 
         emit(AuthSuccess(res['message']));
-        clearControllers();
+
         EasyLoading.dismiss();
       } else {
         EasyLoading.dismiss();
@@ -84,7 +84,7 @@ class AuthCubit extends Cubit<AuthStates> {
   checkOTP(otp) async {
     if (otpCode == otp) {
       emit(AuthSuccess('Logged in'));
-
+      clearControllers();
       otpCode = null;
       EasyLoading.dismiss();
     } else {
