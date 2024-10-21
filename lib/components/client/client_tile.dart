@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lawyermanagement/blocs/client_bloc/client_cubit.dart';
+import '../../blocs/case_bloc/case_cubit.dart';
 import '../../models/clients_model.dart';
 
 class ClientTile extends StatelessWidget {
@@ -118,7 +121,10 @@ class ClientTile extends StatelessWidget {
                   ),
                   Expanded(
                     child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        BlocProvider.of<ClientCubit>(context)
+                            .deleteClient(clientId: clientDetails.clientId);
+                      },
                       label: const Text('Delete'),
                       icon: const Icon(
                         CupertinoIcons.delete,

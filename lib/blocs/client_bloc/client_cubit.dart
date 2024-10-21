@@ -70,4 +70,18 @@ class ClientCubit extends Cubit<ClientStates> {
     }
     emit(ClientInitial());
   }
+
+  deleteClient({required clientId}) async {
+    emit(ClientLoading());
+    EasyLoading.show(status: 'Deleting...', dismissOnTap: false);
+    await ClientsApi().deleteClient(clientId: clientId).then((res) {
+      if (res['success'] == true) {
+        emit(ClientAdded());
+        fetchClients();
+      } else {
+        emit(ClientFailure());
+      }
+      EasyLoading.dismiss();
+    });
+  }
 }

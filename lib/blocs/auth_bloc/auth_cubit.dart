@@ -82,8 +82,6 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   checkOTP(otp) async {
-    print(otp);
-    print(otpCode);
     if (otpCode == otp) {
       emit(AuthSuccess('Logged in'));
 

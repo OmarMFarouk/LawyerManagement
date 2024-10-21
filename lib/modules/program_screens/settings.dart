@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_cubit.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_states.dart';
+import 'package:lawyermanagement/layout/cubit/cubit.dart';
 import 'package:restart_app/restart_app.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -49,7 +50,7 @@ class SettingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'There are $remainingDays days left in the month',
+                      'Subscription ends within ${calcRemaining()} days',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

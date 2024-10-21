@@ -15,12 +15,14 @@ class ApiEndPoints {
   static const String login = '$baseUrl/auth/login.php';
   static const String checkAuth = '$baseUrl/auth/check_auth.php';
   static const String checkRenewal = '$baseUrl/auth/check_renewal.php';
+  static const String resendOtp = '$baseUrl/auth/resend_otp.php';
 
   // clients
   static const String showClientsDropDown =
       '$baseUrl/clients/show_clients_dropdown.php';
   static const String showClients = '$baseUrl/clients/show_clients.php';
   static const String addClient = '$baseUrl/clients/add_client.php';
+  static const String deleteClient = '$baseUrl/clients/delete_client.php';
 
   // Cases
   static const String showCases = '$baseUrl/cases/show_cases.php';

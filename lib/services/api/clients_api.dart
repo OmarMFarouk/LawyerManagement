@@ -46,4 +46,20 @@ class ClientsApi {
       log(e.toString());
     }
   }
+
+  Future deleteClient({required clientId}) async {
+    try {
+      var request = await http.post(Uri.parse(ApiEndPoints.deleteClient),
+          body: {
+            'vendor_id': currentVendor!.vendordetails!.vendorid,
+            'client_id': clientId
+          });
+      if (request.statusCode < 300) {
+        var response = jsonDecode(request.body);
+        return response;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

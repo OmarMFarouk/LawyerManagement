@@ -111,4 +111,19 @@ class AuthApi {
       log(e.toString());
     }
   }
+
+  Future resendOTP({required email, required otpCode}) async {
+    try {
+      var request = await http.post(Uri.parse(ApiEndPoints.resendOtp),
+          body: {'email': email, 'otp_code': otpCode});
+      if (request.statusCode < 300) {
+        var response = jsonDecode(request.body);
+        return bool.parse(response['exist'].toString());
+      } else {
+        return 'error';
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_cubit.dart';
 import 'package:lawyermanagement/blocs/auth_bloc/auth_states.dart';
+import 'package:lawyermanagement/services/api/auth_api.dart';
 import 'package:url_launcher/link.dart';
 
 import '../../modules/program_screens/layout.dart';
@@ -381,7 +382,12 @@ class _OTPScreenState extends State<OTPScreen> {
                                                 ),
                                                 const SizedBox(height: 30),
                                                 ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: () => AuthApi()
+                                                      .resendOTP(
+                                                          email: cubit
+                                                              .emailCont.text,
+                                                          otpCode:
+                                                              cubit.otpCode),
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
