@@ -1,10 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../blocs/case_bloc/case_cubit.dart';
+import '../general/my_field.dart';
 
-class CaseDetailsFB extends StatelessWidget {
-  const CaseDetailsFB(
+class CommentFB extends StatelessWidget {
+  const CommentFB(
       {super.key,
       required this.caseId,
       required this.caseClientId,
@@ -40,7 +40,7 @@ class CaseDetailsFB extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Add File',
+                                'Add Comment',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -48,38 +48,16 @@ class CaseDetailsFB extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              InkWell(
-                                onTap: () async {
-                                  await cubit.pickFile();
-                                  setState(() {});
-                                },
-                                child: Ink(
-                                  height: 50,
-                                  padding: const EdgeInsets.all(10),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFFEBEBEB),
-                                      border: Border.all(),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      cubit.pickedFile == null
-                                          ? const Text('Choose File')
-                                          : Text(cubit.pickedFile!.name),
-                                      const Icon(Icons.upload_file)
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              MyField(
+                                  label: 'Write a comment...',
+                                  controller: cubit.noteCont),
                               const SizedBox(height: 30),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    if (cubit.pickedFile != null) {
-                                      cubit.addFile(
+                                    if (cubit.noteCont.text.isNotEmpty) {
+                                      cubit.addComment(
                                           caseId: caseId,
                                           caseClientId: caseClientId);
                                       Navigator.pop(context);
@@ -110,11 +88,11 @@ class CaseDetailsFB extends StatelessWidget {
               });
         },
         label: const Text(
-          'Add File',
+          'Add Note',
           style: TextStyle(color: CupertinoColors.white, fontSize: 18),
         ),
         icon: const Icon(
-          Icons.balance,
+          Icons.comment_bank_rounded,
           size: 27,
           color: Colors.white,
         ),

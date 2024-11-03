@@ -135,6 +135,26 @@ class CaseCubit extends Cubit<CaseStates> {
     }
   }
 
+  addComment({required caseId, required caseClientId}) async {
+    emit(CaseLoading());
+    EasyLoading.show(status: 'Loading...', dismissOnTap: false);
+    await CasesApi()
+        .addComment(
+            caseClientId: caseClientId,
+            caseId: caseId,
+            comment: noteCont.text.trim())
+        .then((res) {
+      if (res['success'] == true) {
+        emit(CaseAdded());
+        EasyLoading.dismiss();
+        clearControllers();
+        fetchCases();
+      } else {
+        emit(CaseFailure('Check Internet'));
+      }
+    });
+  }
+
   deleteCase({required caseId}) async {
     emit(CaseLoading());
     EasyLoading.show(status: 'Deleting...', dismissOnTap: false);
@@ -158,6 +178,7 @@ class CaseCubit extends Cubit<CaseStates> {
     courtChamberCont.clear();
     typeCont.clear();
     clientId = '';
+    noteCont.clear();
     pickedFile = null;
   }
 }

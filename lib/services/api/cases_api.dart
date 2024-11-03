@@ -38,6 +38,22 @@ class CasesApi {
     }
   }
 
+  Future fetchCaseComments({caseId}) async {
+    try {
+      var request = await http.post(Uri.parse(ApiEndPoints.showCaseComments),
+          body: {
+            'vendor_id': currentVendor!.vendordetails!.vendorid,
+            'case_id': caseId
+          });
+      if (request.statusCode < 300) {
+        var response = jsonDecode(request.body);
+        return response;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   Future addCase(
       {required Case model,
       required fileData,
@@ -71,6 +87,24 @@ class CasesApi {
       var request = await http.post(Uri.parse(ApiEndPoints.deleteCase), body: {
         'vendor_id': currentVendor!.vendordetails!.vendorid,
         'case_id': caseId
+      });
+      if (request.statusCode < 300) {
+        var response = jsonDecode(request.body);
+        return response;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future addComment(
+      {required comment, required caseId, required caseClientId}) async {
+    try {
+      var request = await http.post(Uri.parse(ApiEndPoints.addComment), body: {
+        'vendor_id': currentVendor!.vendordetails!.vendorid,
+        'case_id': caseId,
+        'case_clientId': caseClientId,
+        'comment': comment
       });
       if (request.statusCode < 300) {
         var response = jsonDecode(request.body);

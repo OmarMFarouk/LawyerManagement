@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthStates>(listener: (context, state) {
         if (state is AuthSuccess) {
           showCupertinoDialog(
-              context: context, builder: (context) => OTPScreen());
+              context: context, builder: (context) => const OTPScreen());
         }
         if (state is AuthFailure) {
           ScaffoldMessenger.of(context)

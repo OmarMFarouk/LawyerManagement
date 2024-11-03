@@ -7,7 +7,6 @@ import 'package:lawyermanagement/blocs/auth_bloc/auth_states.dart';
 import 'package:lawyermanagement/models/bundles_model.dart';
 import 'package:lawyermanagement/models/countries_model.dart';
 import 'package:lawyermanagement/models/vendor_model.dart';
-import 'package:lawyermanagement/services/app_shared.dart';
 import '../../services/api/auth_api.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
@@ -70,7 +69,7 @@ class AuthCubit extends Cubit<AuthStates> {
       }
       if (res['success'] == true) {
         currentVendor = VendorModel.fromJson(res);
-
+        print(otpCode);
         emit(AuthSuccess(res['message']));
 
         EasyLoading.dismiss();
@@ -85,6 +84,7 @@ class AuthCubit extends Cubit<AuthStates> {
     if (otpCode == otp) {
       emit(AuthSuccess('Logged in'));
       clearControllers();
+      print('zopry');
       otpCode = null;
       EasyLoading.dismiss();
     } else {

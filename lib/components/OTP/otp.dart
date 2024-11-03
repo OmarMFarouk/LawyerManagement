@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,12 +36,12 @@ class _OTPScreenState extends State<OTPScreen> {
       setState(() {
         _isTimerActive = true;
       });
-      Timer.periodic(Duration(seconds: 1), (s) {
+      Timer.periodic(const Duration(seconds: 1), (s) {
         setState(() {
           _timerDuration -= 1;
         });
       });
-      Future.delayed(Duration(seconds: 30), () {
+      Future.delayed(const Duration(seconds: 30), () {
         setState(() {
           _isTimerActive = false;
           _timerDuration = 30;
@@ -163,7 +162,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                                                     .circular(
                                                                         10),
                                                             borderSide:
-                                                                BorderSide(
+                                                                const BorderSide(
                                                                     color: Colors
                                                                         .white,
                                                                     width: 2),
@@ -257,6 +256,13 @@ class _OTPScreenState extends State<OTPScreen> {
                                                     : TextButton(
                                                         onPressed: () {
                                                           _startTimer();
+                                                          AuthApi().resendOTP(
+                                                              email: cubit
+                                                                  .emailCont
+                                                                  .text
+                                                                  .trim(),
+                                                              otpCode: cubit
+                                                                  .otpCode);
                                                         },
                                                         child: const Text(
                                                             'Resend OTP',
@@ -340,7 +346,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                                                     .circular(
                                                                         10),
                                                             borderSide:
-                                                                BorderSide(
+                                                                const BorderSide(
                                                                     color: Colors
                                                                         .white,
                                                                     width: 2),
@@ -391,12 +397,18 @@ class _OTPScreenState extends State<OTPScreen> {
                                                 ),
                                                 const SizedBox(height: 30),
                                                 ElevatedButton(
-                                                  onPressed: () => AuthApi()
-                                                      .resendOTP(
-                                                          email: cubit
-                                                              .emailCont.text,
-                                                          otpCode:
-                                                              cubit.otpCode),
+                                                  onPressed: () {
+                                                    if (_formKey.currentState!
+                                                        .validate()) {
+                                                      String s = '';
+                                                      for (var element
+                                                          in _otpControllers) {
+                                                        s = '$s${element.text}';
+                                                      }
+                                                      cubit.checkOTP(
+                                                          s.toLowerCase());
+                                                    }
+                                                  },
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
@@ -429,6 +441,13 @@ class _OTPScreenState extends State<OTPScreen> {
                                                     : TextButton(
                                                         onPressed: () {
                                                           _startTimer();
+                                                          AuthApi().resendOTP(
+                                                              email: cubit
+                                                                  .emailCont
+                                                                  .text
+                                                                  .trim(),
+                                                              otpCode: cubit
+                                                                  .otpCode);
                                                         },
                                                         child: const Text(
                                                             'Resend OTP',

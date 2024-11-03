@@ -74,7 +74,7 @@ class WebCubit extends Cubit<WebStates> {
       title: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 100),
         child: Text(
-          'Lawyers',
+          'Visaino',
           style: TextStyle(color: CupertinoColors.white),
         ),
       ),
@@ -84,143 +84,10 @@ class WebCubit extends Cubit<WebStates> {
           padding: const EdgeInsets.symmetric(horizontal: 100),
           child: Builder(
             builder: (BuildContext context) {
-              return IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context, // This context is correctly scoped
-                    builder: (BuildContext context) {
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Update Information',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.indigo[800],
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              TextField(
-                                controller: TextEditingController(
-                                    text: currentVendor!
-                                        .vendordetails!.vendororganizationName),
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(
-                                      CupertinoIcons.building_2_fill,
-                                      color: Colors.indigo[800]),
-                                  labelText: 'Organization Name',
-                                  border: const OutlineInputBorder(),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.indigo[800]!, width: 2.0),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey[400]!, width: 1.0),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              TextField(
-                                controller: TextEditingController(
-                                    text: currentVendor!
-                                        .vendordetails!.vendorname),
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(CupertinoIcons.person_alt,
-                                      color: Colors.indigo[800]),
-                                  labelText: 'Full Name',
-                                  border: const OutlineInputBorder(),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.indigo[800]!, width: 2.0),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey[400]!, width: 1.0),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.phone,
-                              ),
-                              const SizedBox(height: 10),
-                              TextField(
-                                controller: TextEditingController(
-                                    text: currentVendor!
-                                        .vendordetails!.vendoremail),
-                                decoration: InputDecoration(
-                                  prefixIcon: Icon(CupertinoIcons.mail_solid,
-                                      color: Colors.indigo[800]),
-                                  labelText: 'Email',
-                                  border: const OutlineInputBorder(),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.indigo[800]!, width: 2.0),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey[400]!, width: 1.0),
-                                  ),
-                                ),
-                                keyboardType: TextInputType.phone,
-                              ),
-                              const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Text('Left',
-                                      style: TextStyle(fontSize: 18)),
-                                  Text(
-                                    calcRemaining(),
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Your update logic here
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Colors.indigo[800], // Button color
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 12),
-                                  textStyle: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                child: const Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.update,
-                                        color:
-                                            Colors.white), // Add an update icon
-                                    SizedBox(width: 8),
-                                    Text(
-                                      'Update',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(
-                  CupertinoIcons.person_alt_circle_fill,
+              return const Icon(
+                  Icons.account_balance,
                   size: 35,
                   color: Colors.white,
-                ),
               );
             },
           ),
@@ -231,7 +98,7 @@ class WebCubit extends Cubit<WebStates> {
       title: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 100),
         child: Text(
-          'Lawyers',
+          'Visaino',
           style: TextStyle(color: CupertinoColors.white),
         ),
       ),
@@ -239,13 +106,12 @@ class WebCubit extends Cubit<WebStates> {
       actions: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 100),
-          child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                CupertinoIcons.person_alt_circle_fill,
+          child:
+               const Icon(
+                CupertinoIcons.person_add_solid,
                 size: 35,
                 color: Colors.white,
-              )),
+              ),
         )
       ],
     ),
@@ -253,7 +119,7 @@ class WebCubit extends Cubit<WebStates> {
       title: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 100),
         child: Text(
-          'Lawyers',
+          'Visaino',
           style: TextStyle(color: CupertinoColors.white),
         ),
       ),
@@ -261,13 +127,11 @@ class WebCubit extends Cubit<WebStates> {
       actions: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 100),
-          child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
+          child:  const Icon(
                 CupertinoIcons.person_alt_circle_fill,
                 size: 35,
                 color: Colors.white,
-              )),
+              ),
         )
       ],
     ),

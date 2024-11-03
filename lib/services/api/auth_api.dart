@@ -92,6 +92,7 @@ class AuthApi {
       }
     } catch (e) {
       log(e.toString());
+      log('zopr');
     }
   }
 

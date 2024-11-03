@@ -27,7 +27,10 @@ class ApiEndPoints {
   // Cases
   static const String showCases = '$baseUrl/cases/show_cases.php';
   static const String showCaseFiles = '$baseUrl/cases/show_case_files.php';
+  static const String showCaseComments =
+      '$baseUrl/cases/show_case_comments.php';
   static const String addCaseFile = '$baseUrl/cases/add_case_file.php';
   static const String addCase = '$baseUrl/cases/add_case.php';
+  static const String addComment = '$baseUrl/cases/add_case_comment.php';
   static const String deleteCase = '$baseUrl/cases/delete_case.php';
 }
